@@ -16,7 +16,7 @@ namespace LinkedList
 
     class LinkedList
     {
-        Node list = null;
+        public Node list { get; set; }
 
         public void InsertFront(int data)
         {
@@ -75,6 +75,60 @@ namespace LinkedList
             }
             list = prev;
         }
+
+        public void DeleteFirst()
+        {
+            if (list == null)
+                return;
+            if (list.NextNode == null)
+            {
+                list = null;
+                return;
+            }
+            list = list.NextNode;
+        }
+
+        public void DeleteLast()
+        {
+            if (list == null || list.NextNode == null)
+            {
+                list = null;
+                return;
+            }
+            Node curr = list;
+            Node prev=curr;
+            while (curr.NextNode != null)
+            {
+                prev = curr;
+                curr = curr.NextNode;
+            }
+            prev.NextNode = null;
+        }
+
+        public void DeleteAtPosition(int position)
+        {
+            if (list == null)
+            {
+                Console.WriteLine("Empty...");
+                return;
+            }
+            if (position - 1 == 0)
+            {
+                list = list.NextNode;
+                return;
+            }
+            Node prev = list, curr=list,next= list;
+            int currPos=1;
+            while (currPos < position)
+            {
+                next = curr.NextNode;
+                prev = curr;
+                curr = curr.NextNode;
+                currPos++;
+            }
+            prev.NextNode = next.NextNode;
+        }
+
 
         public void PrintList()
         {
